@@ -1,4 +1,4 @@
-This is a FastAPI endpoint that is designed to be spun up in a docker container.
+This is a FastAPI backend endpoint that is designed to be spun up in a docker container.
 
 Once the container is running the documentation can be found at the /ui endpoint.
 
