@@ -1,0 +1,6 @@
+fastapi~=0.111.0
+httpx
+pytest
+sqlalchemy~=2.0.30
+psycopg2-binary
+pydantic~=2.7.3

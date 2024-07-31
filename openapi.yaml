@@ -1,0 +1,155 @@
+openapi: 3.0.3
+info:
+  description: This is the cumstomer api for initial
+  version: 1.0.0
+  title: Simple CustomerInfo API
+  contact:
+    email: test@nope.com
+paths:
+  /CustomerInfo:
+    get:
+      summary: gets a customers basic information
+      description: >
+        By passing in the Customers unique identifier you will get that users
+        basic information
+      operationId: searchCustomers
+      parameters:
+      - name: searchString
+        in: query
+        description: pass an optional search string for looking up inventory
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerBasicInfo'
+        '400':
+          description: Could not find the customer
+    post:
+      summary: adds CustomerInfo
+      description: Adds CustomerInfo to the system
+      operationId: addCustomerInfo
+      requestBody:
+          description: CustomerInfo to add
+          required: false
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerBasicInfo'
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: an existing Customer with this id already exists
+components:
+  schemas:
+    MessageInformation:
+      type: object
+      required:
+        - source
+      properties:
+        source:
+          type: string
+          example: SwaggerExamplePage
+    CustomerBasicInfo:
+      type: object
+      required:
+        - assistanceWithInsurance
+        - county
+        - dateOfBirth
+        - familyPlanningBenefits
+        - firstName
+        - fixedAddress
+        - gender
+        - id
+        - lastName
+      properties:
+        messageInformation:
+          $ref: '#/components/schemas/MessageInformation'
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        firstName:
+          type: string
+          example: Bob
+        middleName:
+          type: string
+          example: Robert
+        lastName:
+          type: string
+          example: BobsLastName
+        dateOfBirth:
+          type: string
+          format: int32
+          example: '2016-08-29'
+        gender:
+          type: string
+          example: Male
+          enum:
+            - Female
+            - Male
+            - Unknown
+        county:
+          type: string
+          example: Anderson
+        fixedAddress:
+          type: boolean
+          example: false
+        assistanceWithInsurance:
+          type: boolean
+          example: false
+        familyPlanningBenefits:
+          type: boolean
+          example: false
+        OtherContactInfo:
+          $ref: '#/components/schemas/OtherContactInfo'
+    OtherContactInfo:
+      type: object
+      properties:
+        preferredContactMethod:
+          type: string
+          example: email
+          enum:
+            - email
+            - phone
+            - post
+        phone:
+          $ref: '#/components/schemas/Phone'
+        alternatePhone:
+          $ref: '#/components/schemas/Phone'
+        email:
+          type: string
+          example: jedwards@nope.com
+        preferredLanguage:
+          type: string
+          example: American Sign
+    Phone:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          example: '408'
+        preFix:
+          type: string
+          example: '867'
+        lineNumber:
+          type: string
+          example: '5309'
+        phoneType:
+          type: string
+          enum:
+            - Business
+            - Fax
+            - Mobile
+            - Other
+            - Pager
+            - Personal
