@@ -1,4 +1,4 @@
-### Customer FastAPI
+# Customer FastAPI
 This is a FastAPI API endpoint that is designed to be spun up in a docker container.
 
 ## Run the application
@@ -13,9 +13,10 @@ docker-compose build
 
 docker-compose up -d
 ```
-
+## Documentation
 Once the container is running the documentation can be found at the /ui endpoint.
 
+### Notes
 The end point uses a postgre database to store various customer information, for specifics please see the openapi.yaml file
 
 This was written in 5 days, and single handedly! As I was in an arm sling.
